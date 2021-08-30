@@ -11,7 +11,7 @@ Original code: https://github.com/joshwatson/f-ing-around-with-binaryninja/blob/
 
 Stream: https://www.twitch.tv/videos/358093527
 
-![](https://github.com/psifertex/callgraph/blob/master/images/callgraph.png?raw=true)
+![](https://github.com/psifertex/callgraph/blob/main/images/callgraph.png?raw=true)
 
 ## Minimum Version
 
