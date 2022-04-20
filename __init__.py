@@ -59,11 +59,7 @@ def collect_calls(view, rootfunction):
             calls[function] = calls.get(function, set())
 
             call_il = caller.get_low_level_il_at(ref.address)
-            if (call_il.operation in (
-                        LowLevelILOperation.LLIL_CALL,
-                        LowLevelILOperation.LLIL_TAILCALL,
-                        LowLevelILOperation.LLIL_CALL_STACK_ADJUST
-                    ) and call_il.dest.operation == LowLevelILOperation.LLIL_CONST_PTR):
+            if isinstance(call_il, Call) and isinstance(call_il.dest, Constant):
                 calls[function].add(caller)
 
     callgraph = FlowGraph()
@@ -73,12 +69,7 @@ def collect_calls(view, rootfunction):
     callgraph.append(root_node)
     function_nodes = {}
     
-    call_queue = view.functions
-
-    while call_queue:
-        # get the next called function
-        callee = call_queue.pop()
-
+    for callee in view.functions:
         # create a new node if one doesn't exist already
         callee_node = get_or_set_call_node(callgraph, function_nodes, callee)
 
